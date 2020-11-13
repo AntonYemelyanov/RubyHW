@@ -37,24 +37,34 @@ class Pet
   def feed
     if @hunger_lvl < 5
       @hunger_lvl += 10
-      puts 'yam-yam-yam'
+      puts 'ням-ням-ням'
     else
-      puts 'i am not hungry'
+      puts 'Я ещё не проголодался'
     end
   end
 
   def put_to_sleep
     if @sleep_lvl < 3
       @sleep_lvl += 10
-      puts 'hrrrr-pssss-hrrrrrr-psssss'
+      @hunger_lvl = 0
+      puts 'хрррр-пшшшш-хрррррр-пшшшш'
     else
-      puts 'I dont want to sleep'
+      puts 'Я не хочу спааааать!'
     end
   end
 
   def play_a_game
 
     loop do
+      @sleep_lvl -= 1
+      if @sleep_lvl <= 1
+        puts 'я устал, хочу спать'
+        break
+      end
+      if @hunger_lvl <= 1
+        puts 'я хочу кушать'
+        break
+      end
       puts 'Загадай число от 1 до 10'
       sleep(1)
       puts 'И я загадал своё число от 1 до 10'
@@ -83,22 +93,24 @@ class Pet
 end
 
 
-# cat.play_a_game
+
 
 def help
-  puts "Поддерживаемые команды: 'создать' "
+  puts "Поддерживаемые команды: ''"
 end
 
 p "Вас приветствует программа Тамагочи. Чтоб вызвать справку наберите 'help'"
-
+cat = Pet.new('Acjka', 'cat')
 
 loop do
   prog_input = gets.chomp
   case prog_input
   when 'help'
     help
-  when 'создать'
-    cat = Pet.new('Acjka', 'cat')
+  when 'уложить спать'
+    cat.put_to_sleep
+  when 'накормить'
+    cat.feed
   when 'привет'
     puts 'хэллоу'
   when 'каконо?', 'как оно?', 'как дела?', 'как делы?', 'как дела', 'какдела'
