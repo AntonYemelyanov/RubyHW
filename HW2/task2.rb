@@ -44,7 +44,7 @@ class Pet
   end
 
   def put_to_sleep
-    if @sleep_lvl < 3
+    if @sleep_lvl < 1
       @sleep_lvl += 10
       @hunger_lvl = 0
       puts 'хрррр-пшшшш-хрррррр-пшшшш'
@@ -90,19 +90,49 @@ class Pet
     end
   end
 
+  def talk
+    loop do
+      @sleep_lvl -= 1
+      @hunger_lvl -= 1
+      if @hunger_lvl <= 1
+        puts 'я хочу спать'
+        break
+      elsif @sleep_lvl <= 1
+        puts 'я хочу есть'
+        break
+      end
+      talk_input = gets.chomp
+      case talk_input
+      when 'help'
+        help
+      when 'привет'
+        puts 'хэллоу'
+      when 'нормально','хорошо'
+        puts 'я за тебя рад'
+      when 'что делаешь?','Что делаешь?','что делаешь','Что делаешь'
+        puts 'С тобой болтаю))'
+      when 'каконо?', 'как оно?', 'как дела?', 'как делы?', 'как дела', 'какдела'
+        puts 'нормально, а у тебя как?'
+      when 'закончить бесседу'
+        break
+      else
+        puts 'Напиши, что нибудь другое'
+      end
+    end
+  end
+
 end
 
 
-
-
 def help
-  puts "Поддерживаемые команды: ''"
+  puts "Поддерживаемые команды: 'уложить спать', 'накормить', 'поиграть','поболтать'"
 end
 
 p "Вас приветствует программа Тамагочи. Чтоб вызвать справку наберите 'help'"
 cat = Pet.new('Acjka', 'cat')
 
 loop do
+  puts 'Вы в главном меню.'
   prog_input = gets.chomp
   case prog_input
   when 'help'
@@ -111,10 +141,9 @@ loop do
     cat.put_to_sleep
   when 'накормить'
     cat.feed
-  when 'привет'
-    puts 'хэллоу'
-  when 'каконо?', 'как оно?', 'как дела?', 'как делы?', 'как дела', 'какдела'
-    puts 'нормально, а у тебя как?'
+  when 'поболтать', 'поговорить'
+    puts 'Привет'
+    cat.talk
   when 'играть', 'поиграть', 'игра'
     cat.play_a_game
   when 'харэ','закончить'
@@ -124,4 +153,5 @@ loop do
 end
 
 end
+
 
