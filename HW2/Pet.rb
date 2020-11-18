@@ -101,57 +101,30 @@ class Pet
         puts 'я хочу есть'
         break
       end
-      talk_input = gets.chomp
+      talk_input = gets.chomp.downcase
       case talk_input
       when 'help'
         help
+      when 'ок'
+        puts 'OK'
+      when 'который час?'
+        puts Time.now.to_s
       when 'привет'
         puts 'хэллоу'
-      when 'нормально','хорошо'
+      when 'что?','что'
+        puts 'ничего)'
+      when 'нормально','хорошо','тоже'
         puts 'я за тебя рад'
-      when 'что делаешь?','Что делаешь?','что делаешь','Что делаешь'
+      when 'что делаешь?','что делаешь'
         puts 'С тобой болтаю))'
       when 'каконо?', 'как оно?', 'как дела?', 'как делы?', 'как дела', 'какдела'
         puts 'нормально, а у тебя как?'
-      when 'закончить бесседу'
+      when 'закончить бесседу','закончить','откл'
         break
       else
         puts 'Напиши, что нибудь другое'
       end
     end
   end
-
 end
-
-
-def help
-  puts "Поддерживаемые команды: 'уложить спать', 'накормить', 'поиграть','поболтать'"
-end
-
-p "Вас приветствует программа Тамагочи. Чтоб вызвать справку наберите 'help'"
-cat = Pet.new('Acjka', 'cat')
-
-loop do
-  puts 'Вы в главном меню.'
-  prog_input = gets.chomp
-  case prog_input
-  when 'help'
-    help
-  when 'уложить спать'
-    cat.put_to_sleep
-  when 'накормить'
-    cat.feed
-  when 'поболтать', 'поговорить'
-    puts 'Привет'
-    cat.talk
-  when 'играть', 'поиграть', 'игра'
-    cat.play_a_game
-  when 'харэ','закончить'
-    break
-  else
-    puts 'Не распознанный ввод'
-end
-
-end
-
 
